@@ -61,4 +61,9 @@ dragonball.innerHTML = `<p>Error ${err.status}: ${message}</p>`;
 console.log('Operación de fetch completada.'));
 
 
+//QUEDAMOS ACÁ CON LO DE LOCAL STORAGE PARTE 2 DESAFIO SEMANA 11
+let url= localstorage.setItem('id', items.id)
+
 const PRODUCTS_URL_MODIFICADA = dragon+items[]+".json" 
+
+const PRODUCTS_URL_MODIFICADA = PRODUCTS_URL+localStorage.getItem("catID")+".json" 
