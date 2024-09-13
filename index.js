@@ -2,12 +2,19 @@ const dragon = 'https://dragonball-api.com/api/characters'
 
 const dragonball = document.getElementById("dragonball");
 
-const inputElement = document.getElementById('input');
+//const inputElement = document.getElementById('input');
 let personajes = [];
 
+let searchQuery = "";
+
 function showData(dataArray) {
+
+  dragonball.innerHTML = "";
     // El for itera sobre los elementos del array
     for (const item of dataArray) {
+
+      if  ((item.name.toLowerCase().includes(searchQuery.toLowerCase()))) {
+
 
       let cardDiv = document.createElement('div');
       cardDiv.className = "cardDragon";
@@ -25,9 +32,15 @@ function showData(dataArray) {
 
       // Añadir la tarjeta al contenedor principal
     dragonball.appendChild(cardDiv);
-}
+    }
+  }
 };
 
+// Añadimos un event listener para el input de búsqueda
+document.getElementById("searchInput").addEventListener("input", function() {
+  searchQuery = this.value; // Actualiza el término de búsqueda
+  showData(personajes); // Muestra la lista de productos filtrada
+});
 
 fetch(dragon)
 .then((res) =>{
@@ -48,28 +61,4 @@ dragonball.innerHTML = `<p>Error ${err.status}: ${message}</p>`;
 console.log('Operación de fetch completada.'));
 
 
-//--- DESAFIATE ---
-
-
-// La función busqueda toma el valor del input y verifica si está en la lista de items
-function busqueda(value) {
-  if (items.includes(value)) {
-    console.log(`${value} está en la lista.`);
-  } else {
-    console.log(`${value} no está en la lista.`);
-  }
-}
-
-// Agrega un EventListener al input para escuchar el evento 'input'
-inputElement.addEventListener('input', function() {
-  // Llama a la función busqueda con el valor actual del input
-  busqueda(inputElement.value);
-});
-
-input.addEventListener("keyup", (e) =>{
-  const str = e.target.value.toLowerCase();
-  const filtro = personajes.filter(personajes=>{
-    return personajes.name.toLowerCase().includes(str);
-  })
-  showData(filtro);
-})
+const PRODUCTS_URL_MODIFICADA = dragon+items[]+".json" 
